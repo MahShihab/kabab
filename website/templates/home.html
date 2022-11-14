@@ -1,0 +1,561 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %}
+
+{% block style%}
+<style>
+
+input[type="number"] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+} 
+
+/* .number-input {
+  border: 0;
+  display: inline-flex;
+} */
+
+.number-input,
+.number-input * {
+  box-sizing: border-box;
+}
+
+.number-input button {
+  outline:none;
+  -webkit-appearance: none;
+  background-color: transparent;
+  /* border: none; */
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  margin: 0;
+  position: relative;
+  box-shadow: 0px 0px 1px #000000;
+    border-radius: 50%;
+}
+
+.number-input button:before,
+.number-input button:after {
+  display: inline-block;
+  position: absolute;
+  content: '';
+  width: 10px;
+  height: 1px;
+  background-color: #000000;
+  transform: translate(-50%, -50%);
+}
+.number-input button.plus:after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.number-input input[type=number] {
+  background-color: transparent;
+  font-family: sans-serif;
+  line-height: 100px;
+  max-width: 5rem;
+  width: 2rem;
+  /* padding: .5rem; */
+  border: none;
+  border-width: 0 2px;
+  font-size: 20px;
+  height: 15px;
+  transform: translate(0px,5px);
+  font-weight: bold;
+  text-align: center;
+  color:#76cb7696;
+}
+
+
+table, th, td {
+    border-collapse: separate;
+  border: 3px solid black;
+  border-radius: 10px;
+}
+table {
+  border-spacing: 10px;
+}
+
+    .animated_tab{
+            float:left;
+            width:100%;
+            text-align:center;
+            text-transform : uppercase;
+            margin-bottom:50px;	
+        }
+        
+        .animated_tab li{
+            position:relative;
+            display:inline-block;	
+        }
+        
+        .animated_tab li a{
+            display:block;
+            color:#14560a;
+            padding:10px 15px;
+            font-weight:bold;
+            text-decoration: none ;
+        }
+        
+        .animated_tab li.active a,
+        .animated_tab li:hover a{
+            color : #333333;
+        }
+        
+        .animated_tab li.active:before,
+        .animated_tab li:hover:before,
+        .animated_tab li.active:after,
+        .animated_tab li:hover:after{
+            background-color: #12e149ae;
+            position: absolute;
+            width:55px;	
+            height:2px;
+        }
+        
+        .animated_tab li:before{
+            content: "";
+            transition: all 0.5s ease-in-out;
+            top: 0px;
+            right: 0px;
+            width: 0px;
+            
+        }
+        
+        .animated_tab li:after {
+            content: "";
+            transition: all 0.5s ease-in-out;
+            left: 0px;
+            bottom: 0px;
+            width: 0px;
+            
+        }
+        #show_bg_2 {
+    background-image:
+    linear-gradient(to right, rgba(0, 0, 0, 0.95), rgba(6, 88, 14, 0.644)),
+    url('images/background.jpg');
+    /* width: 80%; */
+    /* height: 170px; */
+    background-size: cover;
+    color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 5px 3px rgb(0, 0, 0);
+    /* width:fit-content; */
+    height:fit-content;
+    /* display:; */
+}
+
+        </style>
+{% endblock %}
+
+{% block content%}
+
+    
+<div class="container" >
+  <br>
+  <div id='show_bg_2' >
+    <h1 style="font-family: Times New Roman;color: #fafaf8; "> 
+      Special Order
+    </h1>
+    <div class="card shadow-0 border mb-4" style="background-color:transparent; border: none;">
+      <div class="card-body" style="border:none;">
+        <div class="row" style="border:none;">
+          <div class="col-md-2">
+            <h5 class="text-muted mb-0" style="color:white;">{{SI.ItemName }}</h5>
+          </div>
+          <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+            <p class="text-muted mb-0" style="color:white;">{{ SI.ItemType }}</p>
+          </div>
+          <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+            <p class="text-muted mb-0 " style="text-decoration:line-through; color: white;">${{ SI.ItemPrice }}</p>
+            <p class="text-muted mb-0 " style="padding: 5px; color: white;" >${{ (SI.ItemPrice - ( SI.ItemPrice * SI.rival / 100 ))|round(2) }}</p>
+          </div>
+          <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+            <div class="number-input">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+              <input style="color:white;" id="{{ SI.id }}s" class="quantity" min="1" name="quantity" value="1" type="number">
+              <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+            </div>
+          </div>
+          <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+            <button type="button" class="btn btn-primary" style="background-color:black ; border: none;" onclick="addTOorder({{ SI.id }},'{{ SI.id }}s')">Add to order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  <br>
+    <center>
+<h1 style="font-family: Times New Roman;color: #000;"> 
+    Explore Our Menu
+</h1> </center>
+    <ul style="border: radius 2px; ;" class="nav  nav-justified animated_tab" role="tablist" id="myPill">
+        <li class="nav-item" >
+            <a class="nav-link " id="pills-home-tap"
+                data-toggle="pill" href="#All" >
+                All
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link " id="pills-all-tab" data-toggle="pill"
+                href="#Platters" >
+                Platters
+            </a>
+        </li>
+
+        <li class="nav-item" >
+            <a class="nav-link " id="pills-home-tap"
+                data-toggle="pill" href="#Sandwiches"  >
+                Sandwiches
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link " id="pills-all-tab" data-toggle="pill"
+                href="#Salad" >
+                Salad
+            </a>
+        </li>
+
+        <li class="nav-item" >
+            <a class="nav-link " id="pills-home-tap"
+                data-toggle="pill" href="#Kids"  >
+                Kids
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link " id="pills-all-tab" data-toggle="pill"
+                href="#Drinks" >
+                Drinks
+            </a>
+        </li>
+          
+        <li class="nav-item">
+            <a class="nav-link " id="pills-all-tab" data-toggle="pill"
+                href="#Desserts" >
+                Desserts
+            </a>
+        </li>
+
+        <li class="nav-item" style=" background-color:none ">
+            <a class="nav-link " id="pills-home-tap" data-toggle="pill" 
+            href="#Appelizers"  >
+                Appetizers
+            </a>
+        </li>
+        
+        <li class="nav-item">
+            <a class="nav-link " id="pills-all-tab" data-toggle="pill"
+                href="#Sides" >
+                Sides
+            </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link " id="pills-all-tab" data-toggle="pill"
+              href="#Soup" >
+              Soup
+          </a>
+      </li>
+        
+    </ul>
+    <div class="tab-content active " style="width: 90%; background-color: transparent;" >
+        <div id="All" class="container tab-pane fade" style="width: 100%; background-color: transparent;">
+          <div class="row ">
+            {% for x in range(numberOfAllItems) %}
+            {% if (x+1) != SI.id %}
+            <div class="col ">
+            <div class="col-md-2 mx-auto text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); margin-left:15% ;margin-bottom:15px ;width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent; max-height: 630px;min-height: 630px; "><!--max-height: 630px;min-height: 630px;-->
+                  {% set my_string = items[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;" ><!--style=" position: relative; "-->
+                    <h5 class="card-title">{{ items[x].ItemName }}</h5>
+                    <p class="card-text">{{ items[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ items[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}items" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ; position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ items[x].id }},'{{ x }}items')">Add to order</button><!--position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;-->
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+        <div id="Platters" class="container tab-pane fade">
+          <div class="row ">
+            {% for x in range(numOfPlatters) %}
+            {% if Platters[x].id != SI.id %}
+            <div class="col ">
+            <div class="col-md-2 mx-auto text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent;max-height: 630px;min-height: 630px;">
+                  {% set my_string = Platters[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;">
+                    <h5 class="card-title">{{ Platters[x].ItemName }}</h5>
+                    <p class="card-text">{{ Platters[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ Platters[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}Platters" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ;position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ Platters[x].id }},'{{ x }}Platters')">Add to order</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+        <div id="Sandwiches" class="container tab-pane fade">
+          <div class="row ">
+            {% for x in range(numOfSandwiches) %}
+            {% if Sandwiches[x].id != SI.id %}
+            <div class="col">
+            <div class="col-md-2 mx-auto text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); margin-left:15% ;margin-bottom:10px ;width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent;max-height: 630px;min-height: 630px;">
+                  {% set my_string = Sandwiches[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;">
+                    <h5 class="card-title">{{ Sandwiches[x].ItemName }}</h5>
+                    <p class="card-text">{{ Sandwiches[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ Sandwiches[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}Sandwiches" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ;position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ Sandwiches[x].id }},'{{ x }}Sandwiches')">Add to order</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+        <div id="Salad" class="container tab-pane fade">
+          <div class="row ">
+            {% for x in range(numOfSalad) %}
+            {% if Salad[x].id != SI.id %}
+            <div class="col">
+            <div class="col-md-2 text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); margin-left:15% ;margin-bottom:10px ;width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent;max-height: 603px;min-height: 603px;">
+                  {% set my_string = Salad[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;">
+                    <h5 class="card-title">{{ Salad[x].ItemName }}</h5>
+                    <p class="card-text">{{ Salad[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ Salad[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}Salad" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ;position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ Salad[x].id }},'{{ x }}Salad')">Add to order</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+        <div id="Kids" class="container tab-pane fade">
+          <div class="row ">
+            {% for x in range(numOfKids) %}
+            {% if Kids[x].id != SI.id %}
+            <div class="col">
+            <div class="col-md-2 text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); margin-left:15% ;margin-bottom:10px ;width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent;max-height: 630px;min-height: 630px;">
+                  {% set my_string = Kids[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;">
+                    <h5 class="card-title">{{ Kids[x].ItemName }}</h5>
+                    <p class="card-text">{{ Kids[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ Kids[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}Kids" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ;position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ Kids[x].id }},'{{ x }}Kids')">Add to order</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+        <div id="Drinks" class="container tab-pane fade">
+          <div class="row ">
+            {% for x in range(numOfDrinks) %}
+            {% if Drinks[x].id != SI.id %}
+            <div class="col">
+            <div class="col-md-2 mx-auto text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); margin-left:15% ;margin-bottom:10px ;width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent;max-height: 630px;min-height: 630px;">
+                  {% set my_string = Drinks[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;">
+                    <h5 class="card-title">{{ Drinks[x].ItemName }}</h5>
+                    <p class="card-text">{{ Drinks[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ Drinks[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}Drinks" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ;position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ Drinks[x].id }},'{{ x }}Drinks')">Add to order</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+        <div id="Desserts" class="container tab-pane fade">
+          <div class="row ">
+            {% for x in range(numOfDesserts) %}
+            {% if Desserts[x].id != SI.id %}
+            <div class="col">
+            <div class="col-md-2 text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); margin-left:15% ;margin-bottom:10px ;width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent;max-height: 630px;min-height: 630px;">
+                  {% set my_string = Desserts[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;">
+                    <h5 class="card-title">{{ Desserts[x].ItemName }}</h5>
+                    <p class="card-text">{{ Desserts[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ Desserts[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}Desserts" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ;position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ Desserts[x].id }},'{{ x }}Desserts')">Add to order</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+        <div id="Appelizers" class="container tab-pane fade">
+          <div class="row ">
+            {% for x in range(numOfAppelizers) %}
+            {% if Appelizers[x].id != SI.id %}
+            <div class="col">
+            <div class="col-md-2 text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); margin-left:15% ;margin-bottom:10px ;width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent;max-height: 630px;min-height: 630px;">
+                  {% set my_string = Appelizers[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;">
+                    <h5 class="card-title">{{ Appelizers[x].ItemName }}</h5>
+                    <p class="card-text">{{ Appelizers[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ Appelizers[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}Appelizers" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ;position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ Appelizers[x].id }},'{{ x }}Appelizers')">Add to order</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+        <div id="Sides" class="container tab-pane fade">
+          <div class="row ">
+            {% for x in range(numOfSides) %}
+            {% if Sides[x].id != SI.id %}
+            <div class="col">
+            <div class="col-md-2 mx-auto text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); margin-left:15% ;margin-bottom:10px ;width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent;max-height: 630px;min-height: 630px;">
+                  {% set my_string = Sides[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;">
+                    <h5 class="card-title">{{ Sides[x].ItemName }}</h5>
+                    <p class="card-text">{{ Sides[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ Sides[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}Sides" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ;position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ Sides[x].id }},'{{ x }}Sides')">Add to order</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+        </div>
+
+        <div id="Soup" class="container tab-pane fade">
+          <div class="row ">
+            {% for x in range(numOfSoup) %}
+            {% if Soup[x].id != SI.id %}
+            <div class="col">
+            <div class="col-md-2 mx-auto text-center d-flex justify-content-center align-items-center rounded" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0); margin-left:15% ;margin-bottom:10px ;width:fit-content; height: fit-content; min-width: 16rem ;padding: 10px;border: solid ; border-radius: 20px;">
+              <div class="card" style="width: 16rem;background-color: transparent;max-height: 630px;min-height: 630px;">
+                  {% set my_string = Soup[x].pic %}
+                  <img class="card-img-top" src="{{ url_for('static' , filename=my_string) }}" alt="Card image cap">
+                  <div class="card-body" style=" position: relative;">
+                    <h5 class="card-title">{{ Soup[x].ItemName }}</h5>
+                    <p class="card-text">{{ Soup[x].ItemDescription }}</p>
+                    <p class="card-text" style="font-family:Times New Roman, Times, serif ;font-size:larger " >${{ Soup[x].ItemPrice }}</p>
+                    <div class="number-input">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()" ></button>
+                          <input id="{{ x }}Soup" class="quantity" min="1" name="quantity" value="1" type="number">
+                          <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()" class="plus"></button>
+                    </div>
+                  </br>
+                  <button type="button" class="btn btn-primary" style="background-color:black ;position: absolute;bottom:10%; width: fit-content; right: 23%; left: 23%;" onclick="addTOorder({{ Soup[x].id }},'{{ x }}Soup')">Add to order</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+            {% endfor %}
+        </div>
+
+</div>
+
+{% endblock %}

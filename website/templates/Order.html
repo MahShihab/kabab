@@ -1,0 +1,125 @@
+{% extends "base.html" %} {% block title %}Order{% endblock %}
+
+{% block herf%}
+<a href="/" class="nav-item nav-link" id="home">Back</a>
+{% endblock %}
+
+{% block style%}
+<style>
+    .button {
+  display: inline-block;
+  border-radius: 10px;
+  background-color: #000000;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 10px;
+  padding: 10px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.button span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button span:after {
+  content: '\1F60A';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.button:hover span {
+  padding-right: 25px;
+}
+
+.button:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+</style>
+
+
+{% endblock %}
+
+{% block content%}
+
+{% if NumofItemsInO >= 1 %}
+
+<section class="h-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-10 col-xl-8">
+          <div class="card" style="border-radius: 10px; background-image:
+          linear-gradient(to right, rgba(0, 0, 0, 0.95), rgba(6, 88, 14, 0.644)), 
+          url('images/background.jpg');box-shadow: 5px 5px 5px 3px rgb(0, 0, 0);"><!-- rgba(243, 0, 0, 0.751) for red-->
+            <div class="card-header px-4 py-5">
+              <h5 class="text-muted mb-0">Thanks for your Order</h5>
+            </div>
+            <div class="card-body p-4">
+              <!-- <div class="d-flex justify-content-between align-items-center mb-4">
+                <p class="lead fw-normal mb-0" style="color: #a8729a;">Receipt</p>
+                <p class="small text-muted mb-0">Receipt Voucher : 1KAU9-84UIL</p>
+              </div> -->
+              {% for x in range(numofItemOrdered) %}
+              <div class="card shadow-0 border mb-4">
+                <div class="card-body" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0);">
+                  <div class="row">
+                    <div class="col-md-2">
+                      {% set my_string = theItemPic[x] %}
+                      <img src="{{ url_for('static' , filename=my_string) }}"
+                        class="img-fluid" alt="Phone">
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0">{{ theItemname[x] }}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">Qty: {{ theItemcuont[x] }}</p>
+                    </div> 
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                      <p class="text-muted mb-0 small">${{ theItemprice[x]|round(2) }}</p>
+                    </div>
+                    <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                        <button class="button" style="vertical-align:middle" onclick="RemoveFromOrder('{{ theItemKey[x] }}')"><span>Remove </span></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+
+              <div class="d-flex justify-content-between pt-2">
+                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                  <form method="POST" action="/confirm/{{ theItemcuont }}/{{ theItemID[0] }}">
+                    <button type="submit" class="button" style="vertical-align:middle;width: 100px;"><span>confirm </span></button>
+                  </form>
+                </div>
+                <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+                  <button class="button" style="vertical-align:middle;width: 100px;" onclick="cancel()"><span>cancel </span></button>
+               </div>
+              </div>
+            </div>
+            <div class="card-footer border-0 px-4 py-5"
+              style="background-color: #412c3b24; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px;">
+              <h5 name="typePasswordX" value="{{ totalPrice }}" class="d-flex align-items-center justify-content-end text-white text-uppercase mb-0">Total
+                paid: <span class="h2 mb-0 ms-2">${{ totalPrice|round(2) }}</span></h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% else %}
+<center>
+  <h1 style="font-family: Times New Roman"> 
+      No Items Selected &#128546;
+  </h1> </center></br>
+{% endif %}
+{% endblock %}

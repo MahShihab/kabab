@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:\Users\Mahmoud\Desktop\kabab - Copy\website\database.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="3"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="150"/><column_width id="3" width="2170"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,5:mainadmin"/><default_encoding codec=""/><browse_table_settings/></tab_browse><tab_sql><sql name="SQL 1">
+INSERT INTO item VALUES(22,&quot;Shawarma salad&quot;,12.99,&quot;salad&quot;,&quot;Chicken Shawarma over our house salad.&quot;,&quot;no&quot;,&quot;images/Shawarma salad.png&quot;,0);
+INSERT INTO item VALUES(23,&quot;Flafel salad&quot;,12.99,&quot;salad&quot;,&quot;House salad topped with 6pc falafel, hummus, house dressing and a side oftahini sauce.&quot;,&quot;no&quot;,&quot;images/Flafel salad.png&quot;,0);
+
+INSERT INTO item VALUES(24,&quot;Baklava&quot;,4.99,&quot;desserts&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/Baklava.png&quot;,0);
+INSERT INTO item VALUES(25,&quot;Rice Pudding&quot;,4.99,&quot;desserts&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/Rice Pudding.png&quot;,0);
+
+INSERT INTO item VALUES(26,&quot;Lentil Soup&quot;,4.99,&quot;Soup&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/Lentil Soup.png&quot;,0);
+INSERT INTO item VALUES(27,&quot;Chicken Soup&quot;,4.99,&quot;Soup&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/Chicken Soup.png&quot;,0);
+
+INSERT INTO item VALUES(28,&quot;chicken tenders&quot;,8.99,&quot;kids&quot;,&quot;with fries&quot;,&quot;no&quot;,&quot;images/chicken tenders.png&quot;,0);
+INSERT INTO item VALUES(29,&quot;Mozzarella sticks&quot;,8.99,&quot;kids&quot;,&quot;with fries&quot;,&quot;no&quot;,&quot;images/Mozzarella sticks.png&quot;,0);
+
+INSERT INTO item VALUES(30,&quot;Falafel 10pcs&quot;,7.99,&quot;appelizers&quot;,&quot;Deep fried mixture of chickpeas, onion,fresh herbs served with tahini sauce.&quot;,&quot;no&quot;,&quot;images/Falafel 10pcs.png&quot;,0);
+INSERT INTO item VALUES(31,&quot;Hummus&quot;,7.99,&quot;appelizers&quot;,&quot;Chickpeas, tahini sauce served with fresh pita bread.&quot;,&quot;no&quot;,&quot;images/Hummus appetizers.png&quot;,0);
+INSERT INTO item VALUES(32,&quot;Baba Ganoush&quot;,7.99,&quot;appelizers&quot;,&quot;Grilled eggplant, Tahini sauce served with fresh pita bread.&quot;,&quot;no&quot;,&quot;images/Baba Ganoush appetizers.png&quot;,0);
+INSERT INTO item VALUES(33,&quot;Labaneh&quot;,6.99,&quot;appelizers&quot;,&quot;Tangy thick, and creamy yogurt with olive oil served with fresh pita.&quot;,&quot;no&quot;,&quot;images/Labaneh appetizers.png&quot;,0);
+INSERT INTO item VALUES(34,&quot;Makdous&quot;,8.99,&quot;appelizers&quot;,&quot;Olive-oil cured vegan stuffed eggplant with a red pepper, chilli, walnut and garlic filling&quot;,&quot;no&quot;,&quot;images/Makdous.png&quot;,0);
+INSERT INTO item VALUES(35,&quot;Grape Leaves 8pcs&quot;,6.99,&quot;appelizers&quot;,&quot;Served cold, stuffed with rice, olive oil and Mediterranean spices.&quot;,&quot;no&quot;,&quot;images/Grape Leaves 8pcs.png&quot;,0);
+
+INSERT INTO item VALUES(36,&quot;Rice&quot;,4.99,&quot;sides&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/Rice.png&quot;,0);
+INSERT INTO item VALUES(37,&quot;French Fries&quot;,4.99,&quot;sides&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/French Fries.png&quot;,0);
+INSERT INTO item VALUES(38,&quot;Fresh Pita Bread&quot;,1.00,&quot;sides&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/Fresh Pita Bread.png&quot;,0);
+INSERT INTO item VALUES(39,&quot;2 Oz anu sauce&quot;,1.00,&quot;sides&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/2 Oz anu sauce.png&quot;,0);
+INSERT INTO item VALUES(40,&quot;Pita Chips&quot;,3.99,&quot;sides&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/Pita Chips.png&quot;,0);
+
+
+INSERT INTO item VALUES(41,&quot;juice&quot;,3,&quot;drinks&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/juice.png&quot;,0);
+INSERT INTO item VALUES(42,&quot;Bottle Soda&quot;,3,&quot;drinks&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/Bottle Soda.png&quot;,0);
+INSERT INTO item VALUES(43,&quot;Bottle Water&quot;,3,&quot;drinks&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/Bottle Water.png&quot;,0);
+INSERT INTO item VALUES(44,&quot;20oz cup drinks&quot;,3,&quot;drinks&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/20oz cup drinks.png&quot;,0);
+INSERT INTO item VALUES(45,&quot;vitamin water&quot;,3,&quot;drinks&quot;,&quot;--&quot;,&quot;no&quot;,&quot;images/vitamin water.png&quot;,0);
+
+
+
+
+
+INSERT INTO admin VALUES(1,&quot;admin&quot;);</sql><current_tab id="0"/></tab_sql></sqlb_project>

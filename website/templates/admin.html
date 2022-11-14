@@ -1,0 +1,174 @@
+{% extends "base.html" %} {% block title %}Admin{% endblock %}
+
+{% block style%}
+<style>
+    .button {
+      display: inline-block;
+      padding: 7px 10px;
+      font-size: 15px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      outline: none;
+      color: #fff;
+      background-color: #050605;
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 9px #999;
+    }
+    
+    .button:hover {background-color: #012b03}
+    
+    .button:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+    </style>
+{% endblock %}
+
+{% block content %}
+<div id="accordion">
+  <div class="card">
+    <div class="card-header" id="headingOne">
+      <h5 class="mb-0">
+        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Special Order
+        </button>
+      </h5>
+    </div>
+
+    <div id="collapseOne" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
+      <div class="card-body">
+        <div class="row">
+      <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+        <select id="Op" class="selectpicker show-menu-arrow" data-live-search="true" data-size="7">
+          <optgroup label="Platters">
+            {% for x in range(numOfPlatters) %}
+            <option value="{{ Platters[x].id }}">{{ Platters[x].ItemName }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Sandwiches">
+            {% for x in range(numOfSandwiches) %}
+            <option value="{{ Sandwiches[x].id }}">{{ Sandwiches[x].ItemName }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Salad">
+            {% for x in range(numOfSalad) %}
+            <option value="{{ Salad[x].id }}">{{ Salad[x].ItemName }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Desserts">
+            {% for x in range(numOfDesserts) %}
+            <option value="{{ Desserts[x].id }}">{{ Desserts[x].ItemName }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Kids">
+            {% for x in range(numOfKids) %}
+            <option value="{{ Kids[x].id }}">{{ Kids[x].ItemName }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Appelizers">
+            {% for x in range(numOfAppelizers) %}
+            <option value="{{ Appelizers[x].id }}">{{ Appelizers[x].ItemName }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Sides">
+            {% for x in range(numOfSides) %}
+            <option value="{{ Sides[x].id }}">{{ Sides[x].ItemName }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Drinks">
+            {% for x in range(numOfDrinks) %}
+            <option value="{{ Drinks[x].id }}">{{ Drinks[x].ItemName }}</option>
+            {% endfor %}
+          </optgroup>
+          <optgroup label="Soup">
+            {% for x in range(numOfSoup) %}
+            <option value="{{ Soup[x].id }}">{{ Soup[x].ItemName }}</option>
+            {% endfor %}
+          </optgroup>
+        </select>
+      </div>
+      <div class="card-body col-md-2 text-center d-flex justify-content-center align-items-center">
+        <input class="form-control" type="number" max="100" min="1" style="margin-right:10px;max-width: 200px;   " id="rival" placeholder="enter the parcent ">
+      </div>
+      <div class="card-body col-md-2 text-center d-flex justify-content-center align-items-center">
+      <button class="button" style="vertical-align:middle;width: 100px;" onclick="special()"><span>Apply </span></button>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
+{% for x in range(NumOfAllOrders) %}
+
+<br>
+<div class="card shadow-0 border mb-4">
+    <div class="card-body" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0);">
+      <div class="row">
+        {% if AllOrders[x].id < 1000 %}
+        {% set y = AllOrders[x].id %}
+        {% else %}
+        {% set y = AllOrders[x].id % 1000 %}
+        {% endif %}
+
+        <div class="col-md-2">
+            <p class="text-muted mb-0"> #{{ y }} </p>
+        </div>
+        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+          <p class="text-muted mb-0"> {{ AllOrders[x].date }} </p>
+        </div>
+        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+          <p class="text-muted mb-0 small">${{ (AllOrders[x].OrderPrice)|round(2) }} </p>
+        </div>
+        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+            <button class="button" style="vertical-align:middle" onclick="ShowOrder({{ y }},{{ AllOrders[x].id }})"><span>Show Order </span></button>
+        </div>
+        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+            <button class="button" style="vertical-align:middle" onclick="Done({{ AllOrders[x].id }})"><span>Done & print </span></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% if OrderNum == 0 %}
+  <br>
+  {% else %}
+  <!-- <center> -->
+    <br>
+    <h3 style="font-family: Times New Roman"> 
+        items for Order {{ OrderNum }}
+    </h3><!--  </center> -->
+  {% for x in range(numberofLinesU) %}
+  <br>
+  <div class="card shadow-0 border mb-4">
+    <div class="card-body" style="box-shadow: 5px 5px 5px 3px rgb(0, 0, 0);">
+      <div class="row">
+        <div class="col-md-2">
+            <p class="text-muted mb-0"> {{ ShowNameU[x] }} </p>
+        </div>
+        <div class="col-md-2">
+          <p class="text-muted mb-0"> {{ ShowTypeU[x] }} </p>
+      </div>
+        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+          <p class="text-muted mb-0"> Qty:{{ ShowNumU[x] }} </p>
+        </div>
+        <div class="col-md-2 text-center d-flex justify-content-center align-items-center">
+          <p class="text-muted mb-0 small">${{ (ShowPriceU[x])|round(2) }} </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+  <h4 style="position:absolute;top: 2%; right: 1%; color: rgba(255, 255, 255, 0.553);">{{ res }}</h4>
+
+  <script>
+    window.setTimeout( function() {
+      window.location.reload();
+       }, 30000);
+  </script>
+{% endblock %}
