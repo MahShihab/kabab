@@ -363,7 +363,7 @@ def confirm(tata,toto):
         ],
         payment_method_types=['card'],
         mode='payment',
-        success_url=request.host_url + '/success',
+        success_url=request.host_url + '/success'+ f'?totalPrice={totalPrice}&ItemIDs={IIDs}&ItemCount={ICs}',
         cancel_url=request.host_url + '/viewOrder',
     )
     print ("hi")
@@ -373,9 +373,38 @@ def confirm(tata,toto):
 
 @views.route('/success')
 def success():
+    x=0
+    totalPrice = request.args.get('totalPrice')
+    
+    ItemID = request.args.get('ItemIDs')
+    Itemcuont = request.args.get('ItemCount')
+
+    theItemID = []
+    theItemcuont = []
+
+    while(x < len(ItemID)):
+        if ItemID[x].isnumeric():
+            if ItemID[x+1].isnumeric():
+                theItemID.append(int(float(ItemID[x])) * 10 + int(float(ItemID[x+1])))
+                x = x+1
+            else:
+                theItemID.append(ItemID[x]) 
+        x += 1           
+
+    x=0
+
+    while(x < len(Itemcuont)):
+        if Itemcuont[x].isnumeric():
+            if Itemcuont[x+1].isnumeric():
+                theItemcuont.append(int(float(Itemcuont[x])) * 10 + int(float(Itemcuont[x+1])))
+                x = x+1
+            else:
+                theItemcuont.append(Itemcuont[x]) 
+        x += 1
+    
+
     global NumofItemsInO
     NumofItemsInO = 0
-    global totalPrice
     OrderPrice =totalPrice
     new_Order=Order(status = "sent",OrderPrice=OrderPrice )
     db.session.add(new_Order)
