@@ -38,15 +38,17 @@ function viewOrder(){
         MyKeys.push(key);
         MyID.push(test[0]);
         MyCount.push(test[1]);
-        // console.log(MyCount);
-        // console.log(MyID);
+        console.log(MyCount);
+        console.log(MyID);
       }
-     fetch('/addItem', {
+     fetch('/viewOrder', {
          method: 'POST',
          body: JSON.stringify({ MyID: MyID , MyCount: MyCount , MyKeys: MyKeys })
-     }).then((_res)=>{
-        window.location.href = "/viewOrder";
-    })
+     }).then((response)=>{
+        return response.text();
+    }).then((html)=>{
+        document.body.innerHTML = html
+    });
     //   console.log("clear");
     //   localStorage.clear();
 }
@@ -72,20 +74,45 @@ function RemoveFromOrder(itemKey){
         // console.log(MyCount);
         // console.log(MyID);
       }
-     fetch('/removeItem', {
-         method: 'POST',
-         body: JSON.stringify({ MyID: MyID , MyCount: MyCount , MyKeys: MyKeys })
-     }).then((_res)=>{
-        window.location.href = "/viewOrder";
-    })
+      fetch('/viewOrder', {
+        method: 'POST',
+        body: JSON.stringify({ MyID: MyID , MyCount: MyCount , MyKeys: MyKeys })
+    }).then((response)=>{
+       return response.text();
+   }).then((html)=>{
+       document.body.innerHTML = html
+   });
 }
 
 function cancel(){
     console.log("clear");
     localStorage.clear();
-    fetch('/cancel').then((_res)=>{
-        window.location.href = "/viewOrder";
-    })
+    const MyID = [];
+    const MyCount = [];
+    const MyKeys = [];
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        // if(key == "tagSelected"){
+        //     break;
+        // }
+        console.log(key);
+        // console.log(`${key}: ${localStorage.getItem(key)}`)
+        var test = JSON.parse(localStorage.getItem(key));
+        console.log(key);
+        MyKeys.push(key);
+        MyID.push(test[0]);
+        MyCount.push(test[1]);
+        // console.log(MyCount);
+        // console.log(MyID);
+      }
+      fetch('/viewOrder', {
+        method: 'POST',
+        body: JSON.stringify({ MyID: MyID , MyCount: MyCount , MyKeys: MyKeys })
+    }).then((response)=>{
+       return response.text();
+   }).then((html)=>{
+       document.body.innerHTML = html
+   });
 }
 
 function deleteMyLocal(){
@@ -100,12 +127,14 @@ function deleteMyLocal(){
 }
 
 function ShowOrder(OrderNum,OrderID){
-    fetch('/ShowOrder',{
+    fetch('/Home',{
         method: 'POST',
         body: JSON.stringify({ OrderNum : OrderNum , OrderID : OrderID })
-    }).then((_res)=>{
-        window.location.href = "/Home";
-    })
+    }).then((response)=>{
+        return response.text();
+    }).then((html)=>{
+        document.body.innerHTML = html
+    });
 }
 
 function Done(OrderID){

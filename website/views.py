@@ -10,22 +10,22 @@ import stripe
 
 views = Blueprint('views',__name__) 
 
-theItemname  = [] 
-theItemprice = []
-theItemcuont = []
-theItemID = []
-theItemKey = []
-theItemPic = []
-totalPrice: float=0
-totalPriceSe:float = 0
-global NumofItemsInO
-NumofItemsInO = 0
-OrderNum = 0
-OrderNumUser = 0
-ShowNameU = []
-ShowNumU = []
-ShowPriceU = []
-ShowTypeU = []
+# theItemname  = [] 
+# theItemprice = []
+# theItemcuont = []
+# theItemID = []
+# theItemKey = []
+# theItemPic = []
+# totalPrice: float=0
+# totalPriceSe:float = 0
+# global NumofItemsInO
+# NumofItemsInO = 0
+# OrderNum = 0
+# OrderNumUser = 0
+# ShowNameU = []
+# ShowNumU = []
+# ShowPriceU = []
+# ShowTypeU = []
 # specialID = 0
 
 
@@ -58,10 +58,75 @@ def mainHome():
     Soup = Soup , numOfSoup = len(Soup),
     SI = SI)
 
-@views.route('/Home')
+@views.route('/Home',methods=['GET','POST'])
 @login_required
 def admin():
-    global OrderNum
+    ShowNameU = []
+    ShowNumU = []
+    ShowPriceU = []
+    ShowTypeU = []
+    print("jjjjjjjjjjjjjjjjjjjjjjjjjjj")
+
+    ShowNameU.clear()
+    ShowNumU.clear()
+    ShowPriceU.clear()
+    ShowTypeU.clear()
+    # items = []
+    try:
+        OI = json.loads(request.data)
+        OrderId = OI['OrderID']
+        OrderNum = OI['OrderNum']
+
+        orderLine = OrderLine.query.filter_by(Order_id=OrderId).all()
+        Sitem = Item.query.filter_by(Special="yes").first() 
+        specialID = Sitem.id 
+        rivalval = Sitem.rival
+    
+        for x in range(len(orderLine)):
+            itemID=orderLine[x].Item_id 
+            print(itemID,"hhhhhhhhhhhhhhhhhhhhhhhhhhh")
+            items = Item.query.filter_by(id=itemID).first()
+            ShowNumU.append(orderLine[x].ItemNum)
+            if (int(itemID)  == int(specialID)):
+               print("hhhhhhhhhhhhhhhhhhmeaw")
+               ShowPriceU.append(items.ItemPrice -(items.ItemPrice*rivalval/100))
+            else:
+                ShowPriceU.append(items.ItemPrice)   
+            ShowTypeU.append(items.ItemType)
+            ShowNameU.append(items.ItemName)
+    except ValueError as e:
+        OrderNum = 0
+
+    # OI = json.loads(request.data)
+    # OrderId = OI['OrderID']
+    # # global OrderNum
+    # # global OrderNumUser
+    # OrderNum = OI['OrderNum']
+    # # OrderNumUser = OI['OrderNum']
+
+    # if(OrderNum):
+    #     pass
+    # else:
+        
+    
+    # orderLine = OrderLine.query.filter_by(Order_id=OrderId).all()
+    # Sitem = Item.query.filter_by(Special="yes").first() 
+    # specialID = Sitem.id 
+    # rivalval = Sitem.rival
+
+    # for x in range(len(orderLine)):
+    #     itemID=orderLine[x].Item_id 
+    #     print(itemID,"hhhhhhhhhhhhhhhhhhhhhhhhhhh")
+    #     items = Item.query.filter_by(id=itemID).first()
+    #     ShowNumU.append(orderLine[x].ItemNum)
+    #     if (int(itemID)  == int(specialID)):
+    #        print("hhhhhhhhhhhhhhhhhhmeaw")
+    #        ShowPriceU.append(items.ItemPrice -(items.ItemPrice*rivalval/100))
+    #     else:
+    #         ShowPriceU.append(items.ItemPrice)   
+    #     ShowTypeU.append(items.ItemType)
+    #     ShowNameU.append(items.ItemName)
+
     AllOrders = Order.query.filter_by(status = "sent").all() 
     platters = Item.query.filter_by(ItemType = "platters").all() 
     sandwiches = Item.query.filter_by(ItemType = "sandwiches").all() 
@@ -101,7 +166,7 @@ def admin():
 
 @views.route('/rating')
 def rating():
-    global OrderNumUser
+    # global OrderNumUser
     
     max_OId = db.session.query(func.max(Order.id)).scalar()
 
@@ -112,63 +177,18 @@ def rating():
 
     return render_template("rateing.html",user=current_user,OrderNumUser = OrderNumUser )
 
-@views.route('/viewOrder')
+@views.route('/viewOrder',methods=['GET','POST'])
 def viewOrder():
-    global totalPrice
+    # global totalPrice
     totalPrice = 0
 
-    for x in range(len(theItemprice)):
-        totalPrice = totalPrice+theItemprice[x]
+    theItemname  = [] 
+    theItemprice = []
+    theItemcuont = []
+    theItemID = []
+    theItemKey = []
+    theItemPic = []
 
-
-    return render_template("Order.html",user=current_user,NumofItemsInO = NumofItemsInO,theItemKey = theItemKey,theItemPic=theItemPic,
-    totalPrice=totalPrice,theItemcuont=theItemcuont,theItemprice=theItemprice,theItemname=theItemname,theItemID = theItemID,numofItemOrdered = len(theItemID))
-
-
-@views.route('/addItem',methods=['GET','POST'])
-def Add_item():  
-    theItemID.clear()
-    theItemname.clear()
-    theItemprice.clear()
-    theItemcuont.clear() 
-    theItemKey.clear()
-    theItemPic.clear()
-    
-    MyIdANDCount = json.loads(request.data)
-    ItemID = MyIdANDCount['MyID']
-    ItemCount = MyIdANDCount['MyCount']
-    ItemKey = MyIdANDCount['MyKeys']
-    
-    print(ItemID[0] , ItemCount[0] , "hhhhhhhhhhhhhhhhhhhh")  
-    
-    global NumofItemsInO
-    NumofItemsInO = len(ItemCount)          
-
-    Sitem = Item.query.filter_by(Special="yes").first() 
-    specialID = Sitem.id 
-    rivalval = Sitem.rival
-
-    for x in range (len(ItemCount)):
-        items = Item.query.filter_by(id=ItemID[x]).first()
-        ItemName = items.ItemName
-        ItemPrice = items.ItemPrice
-        if (int(ItemID[x])  == int(specialID)):
-          print("hhhhhhhhhhhhhhhhhhmeaw")
-          ItemPrice = float(ItemPrice - (ItemPrice* rivalval/100))
-        ItemPrice = ItemPrice * int(ItemCount[x])
-        theItemID.append(ItemID)
-        theItemname.append(ItemName)
-        theItemprice.append(ItemPrice) 
-        theItemcuont.append(ItemCount[x]) 
-        theItemKey.append(ItemKey[x]) 
-        theItemPic.append(items.pic)
-
-    print(theItemname[0] , theItemprice[0] , theItemcuont[0] )
-      
-    return jsonify({})   
-
-@views.route('/removeItem',methods=['POST'])
-def Remove_item():
     theItemID.clear()
     theItemcuont.clear()
     theItemprice.clear()
@@ -183,7 +203,7 @@ def Remove_item():
     
     # print(ItemID[0] , ItemCount[0] , "hhhhhhhhhhhhhhhhhhhh")  
     
-    global NumofItemsInO
+    # global NumofItemsInO
     NumofItemsInO = len(ItemCount)          
 
     Sitem = Item.query.filter_by(Special="yes").first() 
@@ -207,64 +227,155 @@ def Remove_item():
             theItemPic.append(items.pic) 
 
     # print(theItemname[0] , theItemprice[0] , theItemcuont[0] )
-      
-    return jsonify({})  
+
+    for x in range(len(theItemprice)):
+        totalPrice = totalPrice+theItemprice[x]
 
 
-@views.route('/cancel')   
-def cancel():
-    global NumofItemsInO
-    NumofItemsInO = 0
-    theItemID.clear()
-    theItemcuont.clear()
-    theItemprice.clear()
-    theItemname.clear()
-    theItemKey.clear()
-    theItemPic.clear()
-    return jsonify({})      
+    return render_template("Order.html",user=current_user,NumofItemsInO = NumofItemsInO,theItemKey = theItemKey,theItemPic=theItemPic,
+    totalPrice=totalPrice,theItemcuont=theItemcuont,theItemprice=theItemprice,theItemname=theItemname,theItemID = theItemID,numofItemOrdered = len(theItemID))
 
 
-
-
-@views.route('/ShowOrder',methods=['GET','POST'])   
-def ShowOrder():
-    print("jjjjjjjjjjjjjjjjjjjjjjjjjjj")
-    ShowNameU.clear()
-    ShowNumU.clear()
-    ShowPriceU.clear()
-    ShowTypeU.clear()
-    # items = []
-    OI = json.loads(request.data)
-    OrderId = OI['OrderID']
-    global OrderNum
-    # global OrderNumUser
-    OrderNum = OI['OrderNum']
-    # OrderNumUser = OI['OrderNum']
+# @views.route('/addItem',methods=['GET','POST'])
+# def Add_item():  
+#     theItemID.clear()
+#     theItemname.clear()
+#     theItemprice.clear()
+#     theItemcuont.clear() 
+#     theItemKey.clear()
+#     theItemPic.clear()
     
-    orderLine = OrderLine.query.filter_by(Order_id=OrderId).all()
-    Sitem = Item.query.filter_by(Special="yes").first() 
-    specialID = Sitem.id 
-    rivalval = Sitem.rival
+#     MyIdANDCount = json.loads(request.data)
+#     ItemID = MyIdANDCount['MyID']
+#     ItemCount = MyIdANDCount['MyCount']
+#     ItemKey = MyIdANDCount['MyKeys']
+    
+#     print(ItemID[0] , ItemCount[0] , "hhhhhhhhhhhhhhhhhhhh")  
+    
+#     global NumofItemsInO
+#     NumofItemsInO = len(ItemCount)          
 
-    for x in range(len(orderLine)):
-        itemID=orderLine[x].Item_id 
-        print(itemID,"hhhhhhhhhhhhhhhhhhhhhhhhhhh")
-        items = Item.query.filter_by(id=itemID).first()
-        ShowNumU.append(orderLine[x].ItemNum)
-        if (int(itemID)  == int(specialID)):
-           print("hhhhhhhhhhhhhhhhhhmeaw")
-           ShowPriceU.append(items.ItemPrice -(items.ItemPrice*rivalval/100))
-        else:
-            ShowPriceU.append(items.ItemPrice)   
-        ShowTypeU.append(items.ItemType)
-        ShowNameU.append(items.ItemName)
+#     Sitem = Item.query.filter_by(Special="yes").first() 
+#     specialID = Sitem.id 
+#     rivalval = Sitem.rival
 
-    return jsonify({})  
+#     for x in range (len(ItemCount)):
+#         items = Item.query.filter_by(id=ItemID[x]).first()
+#         ItemName = items.ItemName
+#         ItemPrice = items.ItemPrice
+#         if (int(ItemID[x])  == int(specialID)):
+#           print("hhhhhhhhhhhhhhhhhhmeaw")
+#           ItemPrice = float(ItemPrice - (ItemPrice* rivalval/100))
+#         ItemPrice = ItemPrice * int(ItemCount[x])
+#         theItemID.append(ItemID)
+#         theItemname.append(ItemName)
+#         theItemprice.append(ItemPrice) 
+#         theItemcuont.append(ItemCount[x]) 
+#         theItemKey.append(ItemKey[x]) 
+#         theItemPic.append(items.pic)
+
+#     print(theItemname[0] , theItemprice[0] , theItemcuont[0] )
+      
+#     return jsonify({})   
+
+# @views.route('/removeItem',methods=['POST'])
+# def Remove_item():
+#     theItemID.clear()
+#     theItemcuont.clear()
+#     theItemprice.clear()
+#     theItemname.clear()
+#     theItemKey.clear()
+#     theItemPic.clear()
+
+#     MyIdANDCount = json.loads(request.data)
+#     ItemID = MyIdANDCount['MyID']
+#     ItemCount = MyIdANDCount['MyCount']
+#     ItemKey = MyIdANDCount['MyKeys']
+    
+#     # print(ItemID[0] , ItemCount[0] , "hhhhhhhhhhhhhhhhhhhh")  
+    
+#     global NumofItemsInO
+#     NumofItemsInO = len(ItemCount)          
+
+#     Sitem = Item.query.filter_by(Special="yes").first() 
+#     specialID = Sitem.id 
+#     rivalval = Sitem.rival
+
+#     if (NumofItemsInO > 0):
+#         for x in range (len(ItemCount)):
+#             items = Item.query.filter_by(id=ItemID[x]).first()
+#             ItemName = items.ItemName
+#             ItemPrice = items.ItemPrice
+#             if (int(ItemID[x])  == int(specialID)):
+#               print("hhhhhhhhhhhhhhhhhhmeaw")
+#               ItemPrice = float(ItemPrice - (ItemPrice*rivalval/100))
+#             ItemPrice = ItemPrice * int(ItemCount[x])
+#             theItemID.append(ItemID)
+#             theItemname.append(ItemName)
+#             theItemprice.append(ItemPrice) 
+#             theItemcuont.append(ItemCount[x]) 
+#             theItemKey.append(ItemKey[x])
+#             theItemPic.append(items.pic) 
+
+#     # print(theItemname[0] , theItemprice[0] , theItemcuont[0] )
+      
+#     return jsonify({})  
+
+
+# @views.route('/cancel')   
+# def cancel():
+#     global NumofItemsInO
+#     NumofItemsInO = 0
+#     theItemID.clear()
+#     theItemcuont.clear()
+#     theItemprice.clear()
+#     theItemname.clear()
+#     theItemKey.clear()
+#     theItemPic.clear()
+#     return jsonify({})      
+
+
+
+
+# @views.route('/ShowOrder',methods=['GET','POST'])   
+# def ShowOrder():
+#     print("jjjjjjjjjjjjjjjjjjjjjjjjjjj")
+#     ShowNameU.clear()
+#     ShowNumU.clear()
+#     ShowPriceU.clear()
+#     ShowTypeU.clear()
+#     # items = []
+#     OI = json.loads(request.data)
+#     OrderId = OI['OrderID']
+#     # global OrderNum
+#     # global OrderNumUser
+#     # OrderNum = OI['OrderNum']
+#     # OrderNumUser = OI['OrderNum']
+    
+#     orderLine = OrderLine.query.filter_by(Order_id=OrderId).all()
+#     Sitem = Item.query.filter_by(Special="yes").first() 
+#     specialID = Sitem.id 
+#     rivalval = Sitem.rival
+
+#     for x in range(len(orderLine)):
+#         itemID=orderLine[x].Item_id 
+#         print(itemID,"hhhhhhhhhhhhhhhhhhhhhhhhhhh")
+#         items = Item.query.filter_by(id=itemID).first()
+#         ShowNumU.append(orderLine[x].ItemNum)
+#         if (int(itemID)  == int(specialID)):
+#            print("hhhhhhhhhhhhhhhhhhmeaw")
+#            ShowPriceU.append(items.ItemPrice -(items.ItemPrice*rivalval/100))
+#         else:
+#             ShowPriceU.append(items.ItemPrice)   
+#         ShowTypeU.append(items.ItemType)
+#         ShowNameU.append(items.ItemName)
+
+#     return jsonify({})  
 
 @views.route('/Done',methods=['GET','POST'])   
 def Done():
-    global OrderNum
-    OrderNum = 0
+    # global OrderNum
+    # OrderNum = 0
 
     OI = json.loads(request.data)
     OrderId = OI['OrderID']  
@@ -327,13 +438,24 @@ def confirm(tata,toto):
                 x = x+1
             else:
                 IIDs.append(toto[x]) 
-        x += 1           
+        x += 1
 
-    for x in range(len(tata)):
+    x=0  
+
+    while(x < len(tata)):
         if tata[x].isnumeric():
-            ICs.append(tata[x])
+            if tata[x+1].isnumeric():
+                ICs.append(int(float(tata[x])) * 10 + int(float(tata[x+1])))
+                x = x+1
+            else:
+                ICs.append(tata[x]) 
+        x += 1             
 
-    print(IIDs,"hhhh",ICs)   
+    # for x in range(len(tata)):
+    #     if tata[x].isnumeric():
+    #         ICs.append(tata[x])
+
+    # print(IIDs,"hhhh",ICs)   
 
     for x in range(len(IIDs)):
         TheItem = Item.query.filter_by(id = IIDs[x]).first()
@@ -403,8 +525,8 @@ def success():
         x += 1
     
 
-    global NumofItemsInO
-    NumofItemsInO = 0
+    # global NumofItemsInO
+    # NumofItemsInO = 0
     OrderPrice =totalPrice
     new_Order=Order(status = "sent",OrderPrice=OrderPrice )
     db.session.add(new_Order)
@@ -415,15 +537,11 @@ def success():
     # print("hjhjhj",theItemID[0][2])
     
     for x in range(len(theItemID)):
-       new_OrderLine=OrderLine(Order_id = max_OId , Item_id = theItemID[0][x],ItemNum=theItemcuont[x] )
+       new_OrderLine=OrderLine(Order_id = max_OId , Item_id = theItemID[x],ItemNum=theItemcuont[x] )
        db.session.add(new_OrderLine)
        db.session.commit()
 
-    theItemID.clear()
-    theItemcuont.clear()
-    theItemprice.clear()
-    theItemname.clear()
-    theItemPic.clear()
+    
     return redirect(url_for('views.rating'))
 
 
