@@ -127,6 +127,8 @@ function deleteMyLocal(){
 }
 
 function ShowOrder(OrderNum,OrderID){
+    localStorage.setItem("OrderNum", OrderNum);
+    localStorage.setItem("OrderID", OrderID);
     fetch('/Home',{
         method: 'POST',
         body: JSON.stringify({ OrderNum : OrderNum , OrderID : OrderID })
