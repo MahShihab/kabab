@@ -1,0 +1,61 @@
+INSERT INTO item VALUES(1,"shawarma addiction",13.99,"platters","Chicken shawarma on wrap, Home made garlic sauce, pickles Served with French fries.","yes","images/shawarma addiction.png",50);
+INSERT INTO item VALUES(2,"shawarma Platter",15.99,"platters","Chicken shawarma, Served with Rice, house salad and Pita Bread.","no","images/shawarma Platter.png",0);
+INSERT INTO item VALUES(3,"Kafta kabab",16.99,"platters","One skewer of ground beef mixed with fresh parsley, onions and Middle Eastern spices. Served with Rice, house salad, One skewer of grilled vegetables and Pita Bread.","no","images/Kafta kabab platter.png",0);
+INSERT INTO item VALUES(4,"Chicken kabab",14.99,"platters","One skewer of marinated boneless chicken .Served with Rice,house salad,One skewer of grilled vegetables and Pita Bread.","no","images/Chicken kabab platters.png",0);
+INSERT INTO item VALUES(5,"Grilled Veggles",12.99,"platters","Two fresh mixed grilled vegetables Served with Rice, house salad and Pita Bread.","no","images/Grilled Veggles.png",0);
+INSERT INTO item VALUES(6,"Butter Chicken",19.99,"platters","Chicken Breast mixed with garam masala Served with Rice and Pita Bread.","no","images/Butter Chicken.png",0);
+INSERT INTO item VALUES(7,"Flafel platter",14.99,"platters","Falafel, Hummus, Served with rice, house salad and Pita Bread.","no","images/Flafel platter.png",0);
+
+
+INSERT INTO item VALUES(8,"Cheese Steak",11.99,"sandwiches","Beef Steak,cheese,onion,green pepper,Lettuce,tomato,with signature sauce,sub roll.","no","images/Cheese Steak.png",0);
+INSERT INTO item VALUES(9,"Chicken Shawarma",9.99,"sandwiches","Chicken, pickles,Lettuce, tomato, onion fries,garlic sauce.","no","images/Chicken Shawarma.png",0);
+INSERT INTO item VALUES(10,"Falafel",8.99,"sandwiches","Falafel, Hummus, Tahini sauce,lettuce,tomato,cucumber","no","images/Falafel sandwiches.png",0);
+INSERT INTO item VALUES(11,"Chicken kabab",9.99,"sandwiches","With lettuce, Tomato, Onions, Pickles and choice of sauce.","no","images/Chicken kabab sandwiches.png",0);
+INSERT INTO item VALUES(12,"Kafta kabab",10.99,"sandwiches","ground beef mixed with fresh parsley, onions and Middle Eastern spices. with Onions,Parsley, tomato, sumac and tahini sauce.","no","images/Kafta kabab sandwiches.png",0);
+INSERT INTO item VALUES(13,"Chicken Fajitas",11.99,"sandwiches","sauteed chicken breasts , onion, green pepper,red peppers lettuce, mayo, ketchup, cheese.","no","images/Chicken Fajitas.png",0);
+INSERT INTO item VALUES(14,"Grilled vegetables",7.99,"sandwiches","Lettuce, Tomato, Onions and pickles","no","images/Grilled vegetables.png",0);
+INSERT INTO item VALUES(15,"Hummus",7.99,"sandwiches","Homemade Hummus, Lettuce,Tomato, Onions and pickles","no","images/Hummus sandwiches.png",0);
+INSERT INTO item VALUES(16,"Labaneh",7.99,"sandwiches","Lettuce, Tomato, Onions and pickles","no","images/Labaneh sandwiches.png",0);
+INSERT INTO item VALUES(17,"Baba ganoush",7.99,"sandwiches","With lettuce, Tomato, Onions and pickles","no","images/Baba ganoush sandwiches.png",0);
+
+INSERT INTO item VALUES(18,"House salad",7.99,"salad","Romaine lettuce, Tomato, Cucumber and our house dressing.","no","images/House Salad.png",0);
+INSERT INTO item VALUES(19,"Fattoush salad",9.99,"salad","Romaine lettuce, Tomato, Green onions, Cucumber Toasted Pita chips and our homemade pomegranate dressing.","no","images/Fattoush Salad.png",0);
+INSERT INTO item VALUES(20,"Greek salad",10.99,"salad","Romaine lettuce, Tomato, Onions, Cucumber, kalamata Olives,Feta Cheese and our house dressing.","no","images/Greek salad.png",0);
+INSERT INTO item VALUES(21,"Tabouleh salad",6.99,"salad","Chopped parsley, bulgul onion seasoned with olive oil and fresh lemon juice.","no","images/Tabouleh salad.png",0);
+INSERT INTO item VALUES(22,"Shawarma salad",12.99,"salad","Chicken Shawarma over our house salad.","no","images/Shawarma salad.png",0);
+INSERT INTO item VALUES(23,"Flafel salad",12.99,"salad","House salad topped with 6pc falafel, hummus, house dressing and a side oftahini sauce.","no","images/Flafel salad.png",0);
+
+INSERT INTO item VALUES(24,"Baklava",4.99,"desserts","--","no","images/Baklava.png",0);
+INSERT INTO item VALUES(25,"Rice Pudding",4.99,"desserts","--","no","images/Rice Pudding.png",0);
+
+INSERT INTO item VALUES(26,"Lentil Soup",4.99,"Soup","--","no","images/Lentil Soup.png",0);
+INSERT INTO item VALUES(27,"Chicken Soup",4.99,"Soup","--","no","images/Chicken Soup.png",0);
+
+INSERT INTO item VALUES(28,"chicken tenders",8.99,"kids","with fries","no","images/chicken tenders.png",0);
+INSERT INTO item VALUES(29,"Mozzarella sticks",8.99,"kids","with fries","no","images/Mozzarella sticks.png",0);
+
+INSERT INTO item VALUES(30,"Falafel 10pcs",7.99,"appelizers","Deep fried mixture of chickpeas, onion,fresh herbs served with tahini sauce.","no","images/Falafel 10pcs.png",0);
+INSERT INTO item VALUES(31,"Hummus",7.99,"appelizers","Chickpeas, tahini sauce served with fresh pita bread.","no","images/Hummus appetizers.png",0);
+INSERT INTO item VALUES(32,"Baba Ganoush",7.99,"appelizers","Grilled eggplant, Tahini sauce served with fresh pita bread.","no","images/Baba Ganoush appetizers.png",0);
+INSERT INTO item VALUES(33,"Labaneh",6.99,"appelizers","Tangy thick, and creamy yogurt with olive oil served with fresh pita.","no","images/Labaneh appetizers.png",0);
+INSERT INTO item VALUES(34,"Makdous",8.99,"appelizers","Olive-oil cured vegan stuffed eggplant with a red pepper, chilli, walnut and garlic filling","no","images/Makdous.png",0);
+INSERT INTO item VALUES(35,"Grape Leaves 8pcs",6.99,"appelizers","Served cold, stuffed with rice, olive oil and Mediterranean spices.","no","images/Grape Leaves 8pcs.png",0);
+
+INSERT INTO item VALUES(36,"Rice",4.99,"sides","--","no","images/Rice.png",0);
+INSERT INTO item VALUES(37,"French Fries",4.99,"sides","--","no","images/French Fries.png",0);
+INSERT INTO item VALUES(38,"Fresh Pita Bread",1.00,"sides","--","no","images/Fresh Pita Bread.png",0);
+INSERT INTO item VALUES(39,"2 Oz anu sauce",1.00,"sides","--","no","images/2 Oz anu sauce.png",0);
+INSERT INTO item VALUES(40,"Pita Chips",3.99,"sides","--","no","images/Pita Chips.png",0);
+
+
+INSERT INTO item VALUES(41,"juice",3,"drinks","--","no","images/juice.png",0);
+INSERT INTO item VALUES(42,"Bottle Soda",3,"drinks","--","no","images/Bottle Soda.png",0);
+INSERT INTO item VALUES(43,"Bottle Water",3,"drinks","--","no","images/Bottle Water.png",0);
+INSERT INTO item VALUES(44,"20oz cup drinks",3,"drinks","--","no","images/20oz cup drinks.png",0);
+INSERT INTO item VALUES(45,"vitamin water",3,"drinks","--","no","images/vitamin water.png",0);
+
+
+
+
+
+INSERT INTO admin VALUES(1,"admin");
