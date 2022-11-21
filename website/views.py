@@ -1,4 +1,3 @@
-from asyncio.windows_events import NULL
 from flask import Blueprint,render_template,redirect,url_for,flash,request,jsonify
 from flask_login import login_manager,login_required,current_user
 from .models import Admin,Order,OrderLine,Item,Rating
