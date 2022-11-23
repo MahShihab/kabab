@@ -4,10 +4,12 @@ from .models import Admin,Order,OrderLine,Item,Rating
 from datetime import date
 from . import db
 import json
-from sqlalchemy.sql import func
+from sqlalchemy.sql import func,text
 import stripe
 
 views = Blueprint('views',__name__) 
+
+
 
 # theItemname  = [] 
 # theItemprice = []
@@ -32,6 +34,45 @@ views = Blueprint('views',__name__)
 @views.route('/')
 def mainHome():
     # global specialID
+    sql_command = ''
+    # try:
+    #     sql = text(sql_command)
+    #     # db.engine.execute(sql)
+    #     print(sql)
+    #     db.session.execute(sql)
+    #     db.session.commit()
+    # # Assert in case of error
+    # except Exception as e:
+    #     print (str(e),"oooooooooooooooooooooooooo")
+    sql_file = open('website/SQL.txt','r')
+    # Create an empty command string
+    sql_command = ''
+    
+    # Iterate over all lines in the sql file
+    for line in sql_file:
+        # Ignore commented lines
+        if not line.startswith('--') and line.strip('\n'):
+            # Append line to the command string
+            sql_command += line.strip('\n')
+    
+            # If the command string ends with ';', it is a full statement
+            if sql_command.endswith(';'):
+                # Try to execute statement and commit it
+                # print(sql_command)
+                try:
+                    sql = text(sql_command)
+                    # db.engine.execute(sql)
+                    db.session.execute(sql)
+                    print("meaw")
+                    db.session.commit()
+    
+                # Assert in case of error
+                except Exception as e:
+                    print(str(e))
+
+            # Finally, clear command string
+                finally:
+                    sql_command = '' 
 
     items = Item.query.all()
     platters = Item.query.filter_by(ItemType = "platters").all() 

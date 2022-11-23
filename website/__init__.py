@@ -27,6 +27,8 @@ def create_app():
 
     create_database(app)
 
+    # InitilDataBase()
+
     login_manager.login_views = 'auth.login'
     login_manager.init_app(app)
 
@@ -41,40 +43,50 @@ def create_app():
 
 def create_database(app):
     if not path.exists('website/'+DB_Name):
-        db.create_all(app=app)
-        
-        sql_file = open('website/SQL.txt','r')
+        with app.app_context():
+            db.create_all()
+        print('Created Database')  
 
-        # Create an empty command string
-        sql_command = ''
-        
-        # Iterate over all lines in the sql file
-        for line in sql_file:
-            # Ignore commented lines
-            if not line.startswith('--') and line.strip('\n'):
-                # Append line to the command string
-                sql_command += line.strip('\n')
-        
-                # If the command string ends with ';', it is a full statement
-                if sql_command.endswith(';'):
-                    # Try to execute statement and commit it
-                    print(sql_command)
-                    try:
-                        sql = text(sql_command)
-                        # db.engine.execute(sql)
-                        db.session.execute(sql)
-                        print("meaw")
-                        db.session.commit()
-        
-                    # Assert in case of error
-                    except:
-                        print('Ops')
-        
-                    # Finally, clear command string
-                    finally:
-                        sql_command = ''
+# def InitilDataBase():
+#     sql_command = 'INSERT INTO admin VALUES(1,"admin");'
 
+#     try:
+#         sql = text(sql_command)
+#         # db.engine.execute(sql)
+#         print(sql)
+#         db.session.execute(sql)
+#         db.session.commit()
+#     # Assert in case of error
+#     except Exception as e:
+#         print (str(e),"oooooooooooooooooooooooooo")
 
+    # sql_file = open('website/SQL.txt','r')
 
-
-        print('Created Database')    
+    # # Create an empty command string
+    # sql_command = ''
+    
+    # # Iterate over all lines in the sql file
+    # for line in sql_file:
+    #     # Ignore commented lines
+    #     if not line.startswith('--') and line.strip('\n'):
+    #         # Append line to the command string
+    #         sql_command += line.strip('\n')
+    
+    #         # If the command string ends with ';', it is a full statement
+    #         if sql_command.endswith(';'):
+    #             # Try to execute statement and commit it
+    #             print(sql_command)
+    #             try:
+    #                 sql = text(sql_command)
+    #                 # db.engine.execute(sql)
+    #                 db.session.execute(sql)
+    #                 print("meaw")
+    #                 db.session.commit()
+    
+    #             # Assert in case of error
+    #             except:
+    #                 print('Ops')
+    
+    #             # Finally, clear command string
+    #             finally:
+    #                 sql_command = ''          
