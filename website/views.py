@@ -253,6 +253,8 @@ def viewOrder():
     if (NumofItemsInO > 0):
         for x in range (len(ItemCount)):
             items = Item.query.filter_by(id=ItemID[x]).first()
+            if items == None:
+                continue
             ItemName = items.ItemName
             ItemPrice = items.ItemPrice
             if (int(ItemID[x])  == int(specialID)):
