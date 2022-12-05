@@ -244,7 +244,13 @@ def viewOrder():
     # print(ItemID[0] , ItemCount[0] , "hhhhhhhhhhhhhhhhhhhh")  
     
     # global NumofItemsInO
-    NumofItemsInO = len(ItemCount)          
+    NumofItemsInO = len(ItemCount)  
+
+    print("ldkhkdbkjfs",NumofItemsInO,ItemCount)  
+
+    for x in range (len(ItemCount)):
+        if(ItemCount[x] == None):
+            NumofItemsInO = NumofItemsInO-1      
 
     Sitem = Item.query.filter_by(Special="yes").first() 
     specialID = Sitem.id 
