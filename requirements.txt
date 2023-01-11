@@ -3,3 +3,4 @@ wtforms
 flask_login
 flask_sqlalchemy
 stripe
+gunicorn==20.1.0
