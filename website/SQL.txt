@@ -48,11 +48,16 @@ INSERT INTO item VALUES(39,"2 Oz anu sauce",1.00,"sides","--","no","images/2 Oz 
 INSERT INTO item VALUES(40,"Pita Chips",3.99,"sides","--","no","images/Pita Chips.png",0);
 
 
-INSERT INTO item VALUES(41,"juice",3,"drinks","--","no","images/juice.png",0);
+INSERT INTO item VALUES(41,"Orange juice",3,"drinks","--","no","images/Orange juice.png",0);
 INSERT INTO item VALUES(42,"Bottle Soda",3,"drinks","--","no","images/Bottle Soda.png",0);
 INSERT INTO item VALUES(43,"Bottle Water",3,"drinks","--","no","images/Bottle Water.png",0);
 INSERT INTO item VALUES(44,"20oz cup drinks",3,"drinks","--","no","images/20oz cup drinks.png",0);
-INSERT INTO item VALUES(45,"vitamin water",3,"drinks","--","no","images/vitamin water.png",0);
+INSERT INTO item VALUES(45,"Vitamin water",3,"drinks","--","no","images/vitamin water.png",0);
+INSERT INTO item VALUES(46,"Carrot juice",3,"drinks","--","no","images/Carrot juice.png",0);
+INSERT INTO item VALUES(47,"Cocktail juice",3,"drinks","--","no","images/Cocktail juice.png",0);
+INSERT INTO item VALUES(48,"Lemon juice",3,"drinks","--","no","images/Lemon juice.png",0);
+INSERT INTO item VALUES(49,"Ayran yogurt",3,"drinks","--","no","images/Ayran yogurt.png",0);
+
 
 
 
