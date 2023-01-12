@@ -14,7 +14,8 @@ def create_app():
     app = Flask(__name__)
     stripe.api_key = 'sk_test_51LxEOKFFl6SDYKySskA7EX31yodhMBrFddsIoMeHYTQKHZhgJ59UHbgp7rtJ9w7WFGFMiHAm0dDhh7hEogKhCJR500PzcRm9p9'
     app.config['SECRET_KEY'] = 'kfhsjhfaflk'
-    app.config['SQLALCHEMY_DATABASE_URI'] = F'sqlite:///{DB_Name}'
+    # app.config['SQLALCHEMY_DATABASE_URI'] = F'sqlite:///{DB_Name}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:N48wbaP5GGnNbdCH@mysql-94y3-4t9e.cy68rase44d2.us-west-2.rds.amazonaws.com:3306/KababDB'
     db.init_app(app)
     
     from .views import views
@@ -25,7 +26,7 @@ def create_app():
 
     from .models import Admin,Order,OrderLine,Item
 
-    create_database(app)
+    # create_database(app, db)
 
     # InitilDataBase()
 
@@ -41,11 +42,11 @@ def create_app():
 
     
 
-def create_database(app):
-    if not path.exists('website/'+DB_Name):
-        with app.app_context():
-            db.create_all()
-        print('Created Database')  
+def create_database(app, db):
+    # if not path.exists('website/'+DB_Name):
+    with app.app_context():
+        db.create_all()
+    print('Created Database')  
 
 # def InitilDataBase():
 #     sql_command = 'INSERT INTO admin VALUES(1,"admin");'
