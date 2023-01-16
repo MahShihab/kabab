@@ -27,7 +27,7 @@ def create_app():
     import logging
     gunicorn_logger = logging.getLogger('gunicorn.access')
     
-    app.logger.handlers.extend(gunicorn_logger)
+    app.logger.handlers.extend(gunicorn_logger.handlers)
 
     app.logger.setLevel(logging.DEBUG)
     
