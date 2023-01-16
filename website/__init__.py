@@ -20,6 +20,8 @@ def create_app():
     # app.config['DOMAIN_NAME'] = 'www.kfaddiction.com'
     
     app.config['SESSION_COOKIE_DOMAIN'] = 'kfaddiction.com'
+    app.config['REMEMBER_COOKIE_DOMAIN'] = 'kfaddiction.com'
+
 
 
     db.init_app(app)
