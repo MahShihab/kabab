@@ -12,10 +12,14 @@ def login():
         Apass = request.form.get('typePasswordX')
 
         admin = Admin.query.filter_by(Password=Apass).first()
+        
+        flash(f'in line 16, {admin}', category='warn') 
 
         if admin :
             flash('Logged successfully', category='success')
-            login_user(admin,remember=True)
+            out = login_user(admin,remember=True)
+            flash(f'in line 21, {out}', category='warn') 
+
             return redirect(url_for('views.admin'))
         else :
             flash('wrong password', category='error') 
