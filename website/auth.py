@@ -19,6 +19,8 @@ def login():
             flash('Logged successfully', category='success')
             out = login_user(admin,remember=True)
             flash(f'in line 21, {out}', category='warn') 
+            return render_template("login.html",user=current_user)
+
 
             return redirect(url_for('views.admin'))
         else :
