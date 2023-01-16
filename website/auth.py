@@ -23,7 +23,10 @@ def login():
             out = login_user(admin,remember=True)
             flash(f'in line 21, {out}', category='warn') 
             current_app.logger.error(f'LINE25 -- {out}')
-            return render_template("login.html",user=current_user)
+            try:
+                return render_template("login.html",user=current_user)
+            except:
+                flash(f'in line 29 render error, {out}', category='warn') 
 
 
             return redirect(url_for('views.admin'))
