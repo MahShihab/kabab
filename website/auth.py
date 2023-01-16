@@ -24,12 +24,14 @@ def login():
             flash(f'in line 21, {out}', category='warn') 
             current_app.logger.error(f'LINE25 -- {out}')
             try:
-                return render_template("login.html",user=current_user)
+                print("meshan allah")
+                return redirect(url_for('views.admin'))
+                # return render_template("login.html",user=current_user)
             except:
                 flash(f'in line 29 render error, {out}', category='warn') 
 
 
-            return redirect(url_for('views.admin'))
+            
         else :
             flash('wrong password', category='error') 
       
