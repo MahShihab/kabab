@@ -16,11 +16,20 @@ def create_app():
     app.config['SECRET_KEY'] = 'kfhsjhfaflk'
     # app.config['SQLALCHEMY_DATABASE_URI'] = F'sqlite:///{DB_Name}'
     app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:N48wbaP5GGnNbdCH@mysql-94y3-4t9e.cy68rase44d2.us-west-2.rds.amazonaws.com:3306/KababDB'
-    app.config['SERVER_NAME'] = 'www.kfaddiction.com'
-    app.config['DOMAIN_NAME'] = 'www.kfaddiction.com'
+    # app.config['SERVER_NAME'] = 'www.kfaddiction.com'
+    # app.config['DOMAIN_NAME'] = 'www.kfaddiction.com'
+    
+    app.config['SESSION_COOKIE_DOMAIN'] = 'kfaddiction.com'
 
 
     db.init_app(app)
+    
+    import logging
+    gunicorn_logger = logging.getLogger('gunicorn.access')
+    
+    app.logger.handlers.extend(gunicorn_logger)
+
+    app.logger.setLevel(logging.DEBUG)
     
     from .views import views
     from .auth import auth
