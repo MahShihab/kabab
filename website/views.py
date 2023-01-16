@@ -101,6 +101,7 @@ def mainHome():
 @views.route('/Home',methods=['GET','POST'])
 @login_required
 def admin():
+    print("jjjjjjjjjjjjjjjjjjjjjjjjjjj")
     ShowNameU = []
     ShowNumU = []
     ShowPriceU = []
