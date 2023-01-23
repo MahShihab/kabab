@@ -24,7 +24,8 @@ def login_submission():
         current_app.logger.error(f'LINE25 -- Loggin{out}')
         try:
             print("meshan allah")
-            return redirect(url_for('views.admin'))
+            return redirect(url_for('views.admin'), code=302)
+
             # return render_template("login.html",user=current_user)
         except:
             flash(f'in line 29 render error, {out}', category='warn') 
@@ -33,7 +34,7 @@ def login_submission():
             
     
             
-    return redirect(url_for('auth.login'))
+    return redirect(url_for('auth.login'), code=302)
 
 
 
