@@ -6,31 +6,35 @@ from flask_login import login_user,login_required,logout_user,current_user
 
 auth = Blueprint('auth',__name__)
 
-@auth.route('/login',methods=['GET' , 'POST'])
+@auth.route('/login',methods=['GET'])
 def login():
-    if request.method == 'POST':
-        Apass = request.form.get('typePasswordX')
-
-        admin = Admin.query.filter_by(Password=Apass).first()
-
-        if admin :
-            flash('Logged successfully', category='success')
-            out = login_user(admin,remember=True)
-            flash(f'in line 21, {out}', category='warn') 
-            current_app.logger.error(f'LINE25 -- Loggin{out}')
-            try:
-                print("meshan allah")
-                return redirect(url_for('views.admin'))
-                # return render_template("login.html",user=current_user)
-            except:
-                flash(f'in line 29 render error, {out}', category='warn') 
+    return render_template("login.html")
 
 
+@auth.route('/login_submission',methods=['POST'])
+def login_submission():
+    Apass = request.form.get('typePasswordX')
+
+    admin = Admin.query.filter_by(Password=Apass).first()
+
+    if admin :
+        flash('Logged successfully', category='success')
+        out = login_user(admin,remember=True)
+        flash(f'in line 21, {out}', category='warn') 
+        current_app.logger.error(f'LINE25 -- Loggin{out}')
+        try:
+            print("meshan allah")
+            return redirect(url_for('views.admin'))
+            # return render_template("login.html",user=current_user)
+        except:
+            flash(f'in line 29 render error, {out}', category='warn') 
             
-        else :
-            flash('wrong password', category='error') 
-      
-    return render_template("login.html",user=current_user)
+    flash(f'incorrect password', category='error') 
+            
+    
+            
+    return redirect(url_for('auth.login'))
+
 
 
 @auth.route('/test_login')
