@@ -12,4 +12,4 @@ def decode_flask_cookie(secret_key, cookie_str):
     return s.loads(cookie_str)
 
 
-print(decode_flask_cookie('kfhsjhfaflk', 'eyJfZnJlc2giOmZhbHNlLCJfdXNlcl9pZCI6IjEifQ.Y8UkMQ.V9UG0NkCWhulgLTz3farsq8YaaE'))
+print(decode_flask_cookie('futdyrgf kbjihoutdyrjxfhcgvkbihotr75stxgfh jkoi', '1|a961260834bc1e858c5627e71347218f5d80bd7680591f5057582bf49ff27db47aebee2ac06f4e91df9fbcaefeedf658560829232466398140ed1f650336d573'))

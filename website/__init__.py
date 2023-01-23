@@ -4,6 +4,9 @@ from flask_sqlalchemy import SQLAlchemy
 from os import path
 from sqlalchemy.sql import text 
 import stripe
+from os import environ
+
+mode = environ.get("MODE") or "dev"
 
 login_manager= LoginManager()
 db = SQLAlchemy()
@@ -11,16 +14,35 @@ DB_Name = "database.db"
 # API-KEY = 'sk_test_51LxEOKFFl6SDYKySskA7EX31yodhMBrFddsIoMeHYTQKHZhgJ59UHbgp7rtJ9w7WFGFMiHAm0dDhh7hEogKhCJR500PzcRm9p9'
 
 def create_app():
+    
+    dev_mode = (mode == "dev")
+    
+    
+    
     app = Flask(__name__)
+    
     stripe.api_key = 'sk_test_51LxEOKFFl6SDYKySskA7EX31yodhMBrFddsIoMeHYTQKHZhgJ59UHbgp7rtJ9w7WFGFMiHAm0dDhh7hEogKhCJR500PzcRm9p9'
     app.config['SECRET_KEY'] = 'futdyrgf kbjihoutdyrjxfhcgvkbihotr75stxgfh jkoi'
-    # app.config['SQLALCHEMY_DATABASE_URI'] = F'sqlite:///{DB_Name}'
-    app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:N48wbaP5GGnNbdCH@mysql-94y3-4t9e.cy68rase44d2.us-west-2.rds.amazonaws.com:3306/KababDB'
-    # app.config['SERVER_NAME'] = 'www.kfaddiction.com'
-    # app.config['DOMAIN_NAME'] = 'www.kfaddiction.com'
     
-    app.config['SESSION_COOKIE_DOMAIN'] = 'kfaddiction.com'
-    app.config['REMEMBER_COOKIE_DOMAIN'] = 'kfaddiction.com'
+    if dev_mode:
+     
+        app.config['DOMAIN_NAME'] = 'www.kabab.com'
+        app.config['SERVER_NAME'] = 'www.kabab.com:5000'
+        app.config['SQLALCHEMY_DATABASE_URI'] = F'sqlite:///{DB_Name}'
+        
+        app.config['SESSION_COOKIE_DOMAIN'] = 'www.kabab.com'
+        app.config['REMEMBER_COOKIE_DOMAIN'] = 'www.kabab.com'
+
+        
+    else:
+    
+        app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:N48wbaP5GGnNbdCH@mysql-94y3-4t9e.cy68rase44d2.us-west-2.rds.amazonaws.com:3306/KababDB'
+        
+        app.config['SERVER_NAME'] = 'www.kfaddiction.com'
+        app.config['DOMAIN_NAME'] = 'www.kfaddiction.com'
+    
+        app.config['SESSION_COOKIE_DOMAIN'] = 'kfaddiction.com'
+        app.config['REMEMBER_COOKIE_DOMAIN'] = 'kfaddiction.com'
 
 
 

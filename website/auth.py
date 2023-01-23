@@ -1,4 +1,4 @@
-from flask import Blueprint,render_template,redirect,url_for,request,flash, current_app
+from flask import Blueprint,render_template,redirect,url_for,request,flash, current_app, jsonify
 from . import login_manager,db
 # from werkzeug.security import generate_password_hash , check_password_hash
 from .models import Admin,Order,OrderLine,Item
@@ -12,17 +12,12 @@ def login():
         Apass = request.form.get('typePasswordX')
 
         admin = Admin.query.filter_by(Password=Apass).first()
-        
-        flash(f'in line 16, {admin}', category='warn') 
-        
-        print(f'\n\n\nLINE16 {admin}')
-        current_app.logger.error(f'LINE16 -- {admin}')
 
         if admin :
             flash('Logged successfully', category='success')
             out = login_user(admin,remember=True)
             flash(f'in line 21, {out}', category='warn') 
-            current_app.logger.error(f'LINE25 -- {out}')
+            current_app.logger.error(f'LINE25 -- Loggin{out}')
             try:
                 print("meshan allah")
                 return redirect(url_for('views.admin'))
@@ -37,6 +32,23 @@ def login():
       
     return render_template("login.html",user=current_user)
 
+
+@auth.route('/test_login')
+def test_login():
+    return jsonify({
+        "current_user": str(current_user),
+        "is_authenticated": current_user.is_authenticated
+    })
+
+
+@auth.route('/test_login_required')
+@login_required
+def test_login_required():
+    return jsonify({
+        "current_users": str(current_user),
+        "is_authenticated": current_user.is_authenticated
+    })
+    
 
 @auth.route('/logout')
 @login_required
