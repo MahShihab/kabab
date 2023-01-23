@@ -38,11 +38,11 @@ def create_app():
     
         app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:N48wbaP5GGnNbdCH@mysql-94y3-4t9e.cy68rase44d2.us-west-2.rds.amazonaws.com:3306/KababDB'
         
-        app.config['SERVER_NAME'] = 'www.kfaddiction.com'
-        app.config['DOMAIN_NAME'] = 'www.kfaddiction.com'
+        # app.config['SERVER_NAME'] = 'www.kfaddiction.com'
+        # app.config['DOMAIN_NAME'] = 'www.kfaddiction.com'
     
-        app.config['SESSION_COOKIE_DOMAIN'] = 'kfaddiction.com'
-        app.config['REMEMBER_COOKIE_DOMAIN'] = 'kfaddiction.com'
+        app.config['SESSION_COOKIE_DOMAIN'] = 'www.kfaddiction.com'
+        app.config['REMEMBER_COOKIE_DOMAIN'] = 'www.kfaddiction.com'
 
 
 
