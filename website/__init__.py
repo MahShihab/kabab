@@ -72,11 +72,6 @@ def create_app():
     login_manager.login_views = 'auth.login'
     login_manager.init_app(app)
 
-    @login_manager.user_loader
-    def loud_user(id):
-        return Admin.query.get(int(id))
-
-
     return app
 
     

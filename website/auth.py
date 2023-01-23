@@ -61,3 +61,13 @@ def unauthorized():
     flash('unauthorized','error')
     return redirect(url_for('auth.login'))
 
+@login_manager.user_loader
+def load_user(id):
+    
+    current_app.logger.error(f">>>>> LOADING UER ID: {id}")
+    
+    user = Admin.query.get(int(id))
+    
+    current_app.logger.error(f">>>>> USER: {user}")
+    
+    return user
