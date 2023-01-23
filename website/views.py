@@ -99,7 +99,7 @@ def mainHome():
     SI = SI)
 
 @views.route('/Home',methods=['GET','POST'])
-@login_required
+# @login_required
 def admin():
     print("jjjjjjjjjjjjjjjjjjjjjjjjjjj")
     ShowNameU = []
