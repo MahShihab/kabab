@@ -33,7 +33,7 @@ def create_app():
         app.config['REMEMBER_COOKIE_DOMAIN'] = 'www.kabab.com'
         
     elif mode == "aws":
-        app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:vZQ9686L8aAgUre@kabab-database.c43tmhrynrvx.us-east-2.rds.amazonaws.com:3306/kabab-database'
+        app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:N48wbaP5GGnNbdCH@mysql-94y3-4t9e.cy68rase44d2.us-west-2.rds.amazonaws.com:3306/KababDB'
         
         # vZQ9686L8aAgUre
         
@@ -74,7 +74,7 @@ def create_app():
 
     from .models import Admin,Order,OrderLine,Item
 
-    create_database(app, db)
+    # create_database(app, db)
     # create_local_database(app, db)
 
 
