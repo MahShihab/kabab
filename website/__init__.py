@@ -74,7 +74,7 @@ def create_app():
 
     from .models import Admin,Order,OrderLine,Item
 
-    # create_database(app, db)
+    create_database(app, db)
     # create_local_database(app, db)
 
 
