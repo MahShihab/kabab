@@ -29,7 +29,7 @@ name: Build and Push Backend to Amazon ECR/S
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - website/**
       - .github/workflows/push-to-aws.yml
