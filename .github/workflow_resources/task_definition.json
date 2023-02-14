@@ -1,79 +1,92 @@
 {
+    "taskDefinitionArn": "arn:aws:ecs:us-east-2:649415504353:task-definition/BackendTask:1",
     "containerDefinitions": [
-         {
-             "name": "KababBackend",
-             "cpu": 0,
-             "links": [],
-             "portMappings": [
-                 {
-                     "containerPort": 80,
-                     "hostPort": 80,
-                     "protocol": "tcp"
-                 }
-             ],
-             "essential": true,
-             "entryPoint": [],
-             "command": [],
-             "environment": [
-                 {
-                     "name": "MODE",
-                     "value": "aws"
-                 }
-             ],
-             "environmentFiles": [],
-             "mountPoints": [],
-             "volumesFrom": [],
-             "secrets": [],
-             "dnsServers": [],
-             "dnsSearchDomains": [],
-             "extraHosts": [],
-             "dockerSecurityOptions": [],
-             "dockerLabels": {},
-             "ulimits": [],
-             "logConfiguration": {
-                 "logDriver": "awslogs",
-                 "options": {
-                     "awslogs-create-group": "true",
-                     "awslogs-group": "/ecs/WebBackendTask",
-                     "awslogs-region": "eu-central-1",
-                     "awslogs-stream-prefix": "ecs"
-                 },
-                 "secretOptions": []
-             },
-             "systemControls": []
-         }
-     ],
-     "family": "BackendTask",
-     "executionRoleArn": "arn:aws:iam::879839689434:role/ecsTaskExecutionRole",
-     "networkMode": "awsvpc",
-     "volumes": [],
-     "placementConstraints": [],
- 
-     "runtimePlatform": {
-         "cpuArchitecture": "X86_64",
-         "operatingSystemFamily": "LINUX"
-     },
-     "requiresCompatibilities": [
-         "FARGATE"
-     ],
-     "cpu": "2048",
-     "memory": "4096",
-     "tags": [
-         {
-             "key": "ecs:taskDefinition:createdFrom",
-             "value": "ecs-console-v2"
-         },
-         {
-             "key": "ecs:taskDefinition:updatedFrom",
-             "value": "GithubActions"
-         },
-         {
-             "key": "Project",
-             "value": "Kabab"
-         },
-         {
-             "key": "ecs:taskDefinition:stackId",
-             "value": "arn:aws:cloudformation:eu-central-1:879839689434:stack/ECS-Console-V2-TaskDefinition-293d1de0-d4ea-4c13-9320-b517f44d313d/d63afbc0-80d2-11ec-8c53-0625d678144a"
-         }
-     ]
- }
+        {
+            "name": "KababBackend",
+            "image": "649415504353.dkr.ecr.us-east-2.amazonaws.com/github-actions-backend:latest",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "kababbackend-80-tcp",
+                    "containerPort": 80,
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [
+                {
+                    "name": "MODE",
+                    "value": "aws"
+                }
+            ],
+            "environmentFiles": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/BackendTask",
+                    "awslogs-region": "us-east-2",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "family": "BackendTask",
+    "executionRoleArn": "arn:aws:iam::649415504353:role/ecsTaskExecutionRole",
+    "networkMode": "awsvpc",
+    "revision": 1,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "1024",
+    "memory": "2048",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2023-02-14T12:46:14.218Z",
+    "registeredBy": "arn:aws:iam::649415504353:root",
+    "tags": [
+        {
+            "key": "Project",
+            "value": "Kabab"
+        }
+    ]
+}
