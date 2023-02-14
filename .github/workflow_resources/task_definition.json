@@ -1,0 +1,79 @@
+{
+    "containerDefinitions": [
+         {
+             "name": "KababBackend",
+             "cpu": 0,
+             "links": [],
+             "portMappings": [
+                 {
+                     "containerPort": 80,
+                     "hostPort": 80,
+                     "protocol": "tcp"
+                 }
+             ],
+             "essential": true,
+             "entryPoint": [],
+             "command": [],
+             "environment": [
+                 {
+                     "name": "MODE",
+                     "value": "aws"
+                 }
+             ],
+             "environmentFiles": [],
+             "mountPoints": [],
+             "volumesFrom": [],
+             "secrets": [],
+             "dnsServers": [],
+             "dnsSearchDomains": [],
+             "extraHosts": [],
+             "dockerSecurityOptions": [],
+             "dockerLabels": {},
+             "ulimits": [],
+             "logConfiguration": {
+                 "logDriver": "awslogs",
+                 "options": {
+                     "awslogs-create-group": "true",
+                     "awslogs-group": "/ecs/WebBackendTask",
+                     "awslogs-region": "eu-central-1",
+                     "awslogs-stream-prefix": "ecs"
+                 },
+                 "secretOptions": []
+             },
+             "systemControls": []
+         }
+     ],
+     "family": "BackendTask",
+     "executionRoleArn": "arn:aws:iam::879839689434:role/ecsTaskExecutionRole",
+     "networkMode": "awsvpc",
+     "volumes": [],
+     "placementConstraints": [],
+ 
+     "runtimePlatform": {
+         "cpuArchitecture": "X86_64",
+         "operatingSystemFamily": "LINUX"
+     },
+     "requiresCompatibilities": [
+         "FARGATE"
+     ],
+     "cpu": "2048",
+     "memory": "4096",
+     "tags": [
+         {
+             "key": "ecs:taskDefinition:createdFrom",
+             "value": "ecs-console-v2"
+         },
+         {
+             "key": "ecs:taskDefinition:updatedFrom",
+             "value": "GithubActions"
+         },
+         {
+             "key": "Project",
+             "value": "Kabab"
+         },
+         {
+             "key": "ecs:taskDefinition:stackId",
+             "value": "arn:aws:cloudformation:eu-central-1:879839689434:stack/ECS-Console-V2-TaskDefinition-293d1de0-d4ea-4c13-9320-b517f44d313d/d63afbc0-80d2-11ec-8c53-0625d678144a"
+         }
+     ]
+ }

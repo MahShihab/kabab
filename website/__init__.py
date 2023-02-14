@@ -15,7 +15,6 @@ DB_Name = "database.db"
 
 def create_app():
     
-    dev_mode = (mode == "dev")
     
     
     
@@ -24,7 +23,7 @@ def create_app():
     stripe.api_key = 'sk_test_51LxEOKFFl6SDYKySskA7EX31yodhMBrFddsIoMeHYTQKHZhgJ59UHbgp7rtJ9w7WFGFMiHAm0dDhh7hEogKhCJR500PzcRm9p9'
     app.config['SECRET_KEY'] = 'futdyrgf kbjihoutdyrjxfhcgvkbihotr75stxgfh jkoi'
     
-    if dev_mode:
+    if mode == "dev":
      
         app.config['DOMAIN_NAME'] = 'www.kabab.com'
         app.config['SERVER_NAME'] = 'www.kabab.com:5000'
@@ -32,6 +31,18 @@ def create_app():
         
         app.config['SESSION_COOKIE_DOMAIN'] = 'www.kabab.com'
         app.config['REMEMBER_COOKIE_DOMAIN'] = 'www.kabab.com'
+        
+    elif mode == "aws":
+        app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:N48wbaP5GGnNbdCH@mysql-94y3-4t9e.cy68rase44d2.us-west-2.rds.amazonaws.com:3306/KababDB'
+        
+        # vZQ9686L8aAgUre
+        
+        # app.config['SERVER_NAME'] = 'www.kfaddiction.com'
+        # app.config['DOMAIN_NAME'] = 'www.kfaddiction.com'
+    
+        app.config['SESSION_COOKIE_DOMAIN'] = 'www.kfaddiction.com'
+        app.config['REMEMBER_COOKIE_DOMAIN'] = 'www.kfaddiction.com'
+            
 
         
     else:
