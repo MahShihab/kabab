@@ -72,7 +72,7 @@ def mainHome():
 
             # Finally, clear command string
                 finally:
-                    sql_command = '' 
+                    sql_command = ''  
 
     items = Item.query.all()
     platters = Item.query.filter_by(ItemType = "platters").all() 
