@@ -64,3 +64,7 @@ INSERT INTO item VALUES(49,"Ayran yogurt",3,"drinks","--","no","images/Ayran yog
 
 
 INSERT INTO admin VALUES(1,"admin");
+
+
+
+UPDATE item SET ItemPrice = 8.99 WHERE CustomerID = 30;
