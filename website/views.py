@@ -74,7 +74,7 @@ def mainHome():
     #             finally:
     #                 sql_command = ''  
 
-    items = Item.query.all()
+    items = Item.query.all() 
     platters = Item.query.filter_by(ItemType = "platters").all() 
     sandwiches = Item.query.filter_by(ItemType = "sandwiches").all() 
     salad = Item.query.filter_by(ItemType = "salad").all() 
