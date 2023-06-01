@@ -33,7 +33,7 @@ def create_app():
         app.config['REMEMBER_COOKIE_DOMAIN'] = 'www.kabab.com'
         
     elif mode == "aws":
-        app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:N48wbaP5GGnNbdCH@mysql-94y3-4t9e.cy68rase44d2.us-west-2.rds.amazonaws.com:3306/KababDB'
+        app.config['SQLALCHEMY_DATABASE_URI'] = F'mysql+pymysql://root:N48wbaP5GGnNbdCH@kabab-db.c43tmhrynrvx.us-east-2.rds.amazonaws.com:3306/KababDB'
         
         # vZQ9686L8aAgUre
         
