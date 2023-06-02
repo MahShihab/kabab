@@ -1,5 +1,14 @@
-
-
-
-
 UPDATE item SET ItemPrice = 8.99 WHERE id = 30;
+UPDATE item SET ItemPrice = 8.99 WHERE id = 18;
+UPDATE item SET ItemPrice = 10.99 WHERE id = 19;
+UPDATE item SET ItemPrice = 11.99 WHERE id = 20;
+UPDATE item SET ItemPrice = 13.99 WHERE id = 22;
+UPDATE item SET ItemPrice = 13.99 WHERE id = 23;
+UPDATE item SET ItemName = "Cheesesteak" WHERE id = 8;
+UPDATE item SET ItemPrice = 10.99 WHERE id = 9;
+UPDATE item SET ItemPrice = 10.99 WHERE id = 11;
+UPDATE item SET ItemPrice = 11.99 WHERE id = 12;
+UPDATE item SET ItemPrice = 17.99 WHERE id = 3;
+UPDATE item SET ItemPrice = 16.99 WHERE id = 14;
+DELETE FROM item WHERE id=6;
+DELETE FROM item WHERE id=27;
