@@ -9,6 +9,5 @@ UPDATE item SET ItemPrice = 10.99 WHERE id = 9;
 UPDATE item SET ItemPrice = 10.99 WHERE id = 11;
 UPDATE item SET ItemPrice = 11.99 WHERE id = 12;
 UPDATE item SET ItemPrice = 17.99 WHERE id = 3;
-UPDATE item SET ItemPrice = 16.99 WHERE id = 14;
-DELETE FROM item WHERE id=6;
-DELETE FROM item WHERE id=27;
+UPDATE item SET ItemPrice = 7.99 WHERE id = 14;
+UPDATE item SET ItemPrice = 16.99 WHERE id = 4;
