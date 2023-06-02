@@ -23,7 +23,7 @@ def create_app():
     stripe.api_key = 'sk_test_51LxEOKFFl6SDYKySskA7EX31yodhMBrFddsIoMeHYTQKHZhgJ59UHbgp7rtJ9w7WFGFMiHAm0dDhh7hEogKhCJR500PzcRm9p9'
     app.config['SECRET_KEY'] = 'futdyrgf kbjihoutdyrjxfhcgvkbihotr75stxgfh jkoi' 
     
-    if mode == "dev":
+    if mode == "dev": 
      
         app.config['DOMAIN_NAME'] = 'www.kabab.com'
         app.config['SERVER_NAME'] = 'www.kabab.com:5000'
