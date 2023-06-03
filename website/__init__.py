@@ -18,7 +18,7 @@ def create_app():
     
     
     
-    app = Flask(__name__)
+    app = Flask(__name__)   
     
     stripe.api_key = 'sk_test_51LxEOKFFl6SDYKySskA7EX31yodhMBrFddsIoMeHYTQKHZhgJ59UHbgp7rtJ9w7WFGFMiHAm0dDhh7hEogKhCJR500PzcRm9p9'
     app.config['SECRET_KEY'] = 'futdyrgf kbjihoutdyrjxfhcgvkbihotr75stxgfh jkoi' 
