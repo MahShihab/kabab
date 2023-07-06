@@ -517,7 +517,7 @@ def confirm(tata,toto):
     
     print ("hi")
     print ("hi")
-    txt = "Amaount to pay" 
+    txt = "Amaount to pay" jh
 
     checkout_session = stripe.checkout.Session.create(
         line_items=[
@@ -535,7 +535,7 @@ def confirm(tata,toto):
         payment_method_types=['card'],
         mode='payment',
         success_url=request.host_url + '/success'+ f'?totalPrice={totalPrice}&ItemIDs={IIDs}&ItemCount={ICs}',
-        cancel_url=request.host_url + '/viewOrder',
+        cancel_url=request.host_url + '/',
     )
     print ("hi")
     return redirect(checkout_session.url)
